@@ -10,7 +10,7 @@ Every folder includes:
 - Supporting files like scripts, reports, or screenshots.
 
 ## About Me
-I specialize in vulnerability research and penetration testing, with a focus on identifying and mitigating web vulnerabilities such as XSS, SQL Injection, and CSRF.  
+I specialize in vulnerability research and penetration testing, with a focus on identifying and mitigating web vulnerabilities such as XSS, SQL Injection,Ssrf, and CSRF.  
 My expertise includes utilizing tools like Burp Suite, Nmap, and Metasploit to analyze and secure web applications and systems.
 
 I am passionate about continuously expanding my knowledge in cybersecurity. My areas of interest include advanced exploitation techniques, server-side vulnerabilities, mobile application security, and other emerging challenges in the field.  
