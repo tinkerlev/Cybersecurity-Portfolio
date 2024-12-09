@@ -54,9 +54,6 @@
 
 ## 🔗 Additional Resources
 - [Link to TryHackMe Room](https://tryhackme.com/room/redteamfundamentals)
-- [MITRE ATT&CK Framework](https://attack.mitre.org/): Learn more about tactics, techniques, and procedures (TTPs) used by adversaries.
-- [Guide to Cobalt Strike](https://cobaltstrike.com/): Comprehensive resource for red teaming.
-
 ---
 
 Thank you for exploring my documentation on the **Red Team Fundamentals** room! 😊
