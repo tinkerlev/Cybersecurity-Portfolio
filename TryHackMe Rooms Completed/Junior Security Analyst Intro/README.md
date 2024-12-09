@@ -52,8 +52,6 @@
 
 ## 🔗 Additional Resources
 - [Link to TryHackMe Room](https://tryhackme.com/room/juniorsecurityanalystintro)
-- [Windows Event Logs Documentation](https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/basic-security-audit-events)
-- [Introduction to Splunk](https://www.splunk.com/)
 
 ---
 
