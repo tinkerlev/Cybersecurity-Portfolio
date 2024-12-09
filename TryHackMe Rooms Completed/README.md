@@ -1,4 +1,4 @@
-# 🧑‍💻 TryHackMe Progress
+# 🧑‍💻 TryHackMe Rooms Completed
 
 Welcome to my **TryHackMe Progress** folder! This section of my portfolio highlights my hands-on learning journey through various **TryHackMe** rooms and paths. Each room represents a specific area of cybersecurity, such as networking, cryptography, web application security, and offensive security techniques.
 
