@@ -50,8 +50,7 @@
 
 ## 🔗 Additional Resources
 - [Link to TryHackMe Room](https://tryhackme.com/room/dvwa)
-- [OWASP Top 10 Security Risks](https://owasp.org/www-project-top-ten/)
-- [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/): Practical advice for securing web applications.
+
 
 ---
 
