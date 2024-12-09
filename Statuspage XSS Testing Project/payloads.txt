@@ -1,0 +1,77 @@
+# XSS Payloads for Statuspage Testing
+
+Welcome to the `payloads.txt` file! This document includes the XSS payloads crafted and tested during the project. Each payload is explained clearly, including its purpose, target component, and observed behavior.
+
+---
+
+## 📌 Payload 1: Image Tag Exploitation
+```markdown
+- **Purpose:** Test XSS injection via `<img>` tags and the `onerror` attribute.
+- **Target:** Customization Page, Incidents Page.
+- **Payload:**
+  ```html
+  <img src=x onerror=alert('XSS via img')>
+  ```
+- **Behavior Observed:** The payload triggered a JavaScript alert whenever the image failed to load. This confirmed the presence of an XSS vulnerability.
+```
+
+---
+
+## 📌 Payload 2: Script Tag Injection
+```markdown
+- **Purpose:** Test direct script injection.
+- **Target:** Plan Selection Page, Search Component.
+- **Payload:**
+  ```html
+  <script>alert('XSS via script tag')</script>
+  ```
+- **Behavior Observed:** The script executed as intended, demonstrating the lack of sanitization in the target input fields.
+```
+
+---
+
+## 📌 Payload 3: Onclick Attribute Exploitation
+```markdown
+- **Purpose:** Test JavaScript execution through attributes like `onclick`.
+- **Target:** Buttons on the Customization Page, Plan Selection Page.
+- **Payload:**
+  ```html
+  <button onclick="alert('XSS via button')">Click Me</button>
+  ```
+- **Behavior Observed:** When clicking the button, the payload executed, confirming that event handlers were improperly sanitized.
+```
+
+---
+
+## 📌 Payload 4: Dropdown Menu Exploitation
+```markdown
+- **Purpose:** Test script injection via dropdown options.
+- **Target:** Plan Selection Page dropdown menus.
+- **Payload:**
+  ```html
+  <script>alert('XSS via dropdown')</script>
+  ```
+- **Behavior Observed:** The payload executed when selecting an option, confirming the vulnerability in the dropdown's rendering logic.
+```
+
+---
+
+## 📌 Payload 5: ID Attribute Exploitation
+```markdown
+- **Purpose:** Test attribute-based XSS using the `id` attribute.
+- **Target:** Upload Image Feature.
+- **Payload:**
+  ```html
+  id="test" onclick="alert('XSS via id attribute')"
+  ```
+- **Behavior Observed:** The payload executed when interacting with the modified element, highlighting insufficient sanitization for attribute values.
+```
+
+---
+
+## ⚠️ Ethical Reminder
+```markdown
+All testing was performed ethically and with explicit prior approval. The payloads here are shared for educational purposes only and must not be used in any unauthorized or illegal testing.
+
+Thank you for exploring this file! For more details, please refer to the [report.txt](report.txt) file.
+```
