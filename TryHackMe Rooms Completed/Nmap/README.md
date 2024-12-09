@@ -54,9 +54,6 @@
 
 ## 🔗 Additional Resources
 - [Link to TryHackMe Room](https://tryhackme.com/room/nmap)
-- [Nmap Official Documentation](https://nmap.org/book/man.html)
-- [Nmap Cheat Sheet](https://hackertarget.com/nmap-cheatsheet/)
-- [Zenmap Download](https://nmap.org/zenmap/)
 
 ---
 
