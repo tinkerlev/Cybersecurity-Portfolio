@@ -56,9 +56,7 @@
 
 ## 🔗 Additional Resources
 - [Link to TryHackMe Room](https://tryhackme.com/room/metasploitintro)
-- [Metasploit Unleashed](https://www.offensive-security.com/metasploit-unleashed/): A comprehensive guide to the Metasploit Framework.
-- [Nmap + Metasploit Integration](https://nmap.org/book/zenmap-man.html#zenmap-scripts): Learn how to integrate Nmap scans with Metasploit.
-- [Meterpreter Command Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Meterpreter_Cheat_Sheet.html)
+
 
 ---
 
