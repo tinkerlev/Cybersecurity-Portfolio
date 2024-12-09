@@ -52,22 +52,5 @@ This folder contains visual evidence (screenshots and videos) collected during t
 
 ---
 
-## 🎥 Videos
-
-### 1. `Video1.mp4`
-- **Description:** Captures the full interaction and exploitation of the XSS vulnerability on the **Customization Page**.
-- **Highlights:**
-  - Shows injection of payload.
-  - Demonstrates the alert box triggered upon saving changes.
-
----
-
-### 2. `Video2.mp4`
-- **Description:** Demonstrates the XSS payload in action on the **Incidents Page**.
-- **Highlights:**
-  - Shows payload injection and execution.
-
----
-
 ## ⚠️ Ethical Disclaimer
 All screenshots and videos were captured as part of an **ethical security assessment** conducted with prior approval. These materials are shared for educational purposes only and must not be used in any unauthorized or malicious activities.
