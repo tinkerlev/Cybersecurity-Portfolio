@@ -48,7 +48,6 @@
 
 ## 🔗 Additional Resources
 - [Link to TryHackMe Room](https://tryhackme.com/room/becomeahacker)
-- [OWASP Top 10 Security Risks](https://owasp.org/www-project-top-ten/)
 
 ---
 
