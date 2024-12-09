@@ -52,8 +52,6 @@
 
 ## 🔗 Additional Resources
 - [Link to TryHackMe Room](https://tryhackme.com/room/offsecintro)
-- [Penetration Testing Execution Standard (PTES)](http://www.pentest-standard.org/index.php/Main_Page)
-- [Kali Linux Documentation](https://www.kali.org/docs/)
 
 ---
 
