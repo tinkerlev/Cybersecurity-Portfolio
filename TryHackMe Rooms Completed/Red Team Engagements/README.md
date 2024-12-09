@@ -56,9 +56,6 @@
 
 ## 🔗 Additional Resources
 - [Link to TryHackMe Room](https://tryhackme.com/room/redteamengagements)
-- [MITRE ATT&CK Framework](https://attack.mitre.org/): A comprehensive guide to tactics, techniques, and procedures (TTPs).
-- [Cobalt Strike Documentation](https://cobaltstrike.com/): Learn about adversary emulation tools.
-- [Red Team Field Manual (RTFM)](https://redteammanual.com/): Practical reference for red team operations.
 
 ---
 
