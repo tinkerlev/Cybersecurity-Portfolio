@@ -52,8 +52,7 @@
 
 ## 🔗 Additional Resources
 - [Link to TryHackMe Room](https://tryhackme.com/room/introtonetworking)
-- [Wireshark Beginner's Guide](https://www.wireshark.org/docs/wsug_html_chunked/)
-- [CIDR and Subnet Mask Guide](https://whatismyipaddress.com/cidr)
+
 
 ---
 
