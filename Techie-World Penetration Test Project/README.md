@@ -10,8 +10,6 @@ This folder contains all the key files and resources used in this project. Here'
 
 - **README.md:** You're reading it now! This file provides an overview of the project, the file structure, and guidance on navigating the repository.  
 - **report.txt:** A detailed penetration testing report summarizing the vulnerabilities identified, tools used, and recommendations for improving security.  
-- **screenshots/:** A folder containing screenshots taken during the testing process, illustrating key findings, exploits, and results.  
-
 ---
 
 ## 🚀 Getting Started
