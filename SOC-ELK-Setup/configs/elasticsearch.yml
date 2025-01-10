@@ -1,0 +1,100 @@
+# *Elasticsearch Configuration File*
+# This file defines the configuration for Elasticsearch.
+# Each setting is documented with an explanation to ensure clarity and purpose.
+
+# *Node settings*
+# The name of this Elasticsearch node.
+node.name: "SOC-Elastic-Node1"
+
+# Define the roles of this node in the cluster.
+# Uncomment additional roles if this node is used in a larger cluster.
+node.roles: [master, data, ingest]
+
+# *Cluster settings*
+# The name of the Elasticsearch cluster.
+cluster.name: "SOC-Elastic-Cluster"
+
+# *Directory paths*
+# Path to store Elasticsearch data.
+path.data: /var/lib/elasticsearch
+
+# Path to store Elasticsearch logs.
+path.logs: /var/log/elasticsearch
+
+# *Network settings*
+# The IP address that Elasticsearch binds to.
+network.host: 0.0.0.0
+
+# The port Elasticsearch listens on.
+http.port: 9200
+
+# Configure transport settings for communication between nodes in a cluster.
+transport.host: localhost
+transport.tcp.port: 9300
+
+# *Discovery settings (for multi-node clusters)*
+# A list of IPs or hostnames for other nodes in the cluster.
+discovery.seed_hosts: ["127.0.0.1", "172.16.50.3"]
+
+# Minimum number of master nodes required to avoid split-brain scenarios.
+# Set this to the majority of master-eligible nodes.
+cluster.initial_master_nodes: ["SOC-Elastic-Node1"]
+
+# *Authentication and security*
+# Enable security features (requires X-Pack).
+xpack.security.enabled: true
+
+# Configure the built-in users (e.g., 'elastic').
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.verification_mode: certificate
+xpack.security.transport.ssl.keystore.path: "/path/to/elastic-certificates.p12"
+xpack.security.transport.ssl.truststore.path: "/path/to/elastic-certificates.p12"
+
+# For HTTP layer encryption (optional if HTTPS is required).
+xpack.security.http.ssl.enabled: true
+xpack.security.http.ssl.keystore.path: "/path/to/http-certificates.p12"
+xpack.security.http.ssl.truststore.path: "/path/to/http-certificates.p12"
+
+# *Performance settings*
+# Adjust JVM heap size (defined in jvm.options file).
+# Uncomment the following settings to improve search performance for large datasets.
+indices.memory.index_buffer_size: 20%
+indices.fielddata.cache.size: 40%
+
+# *Thread pool settings*
+# Configure the search and write thread pools to optimize performance.
+thread_pool.search.size: 10
+thread_pool.write.size: 5
+
+# *Log settings*
+# Define the log level. Options: 'trace', 'debug', 'info', 'warn', 'error', 'fatal'.
+logger.level: info
+
+# *Slow query logging*
+# Enable logging of slow search queries for performance monitoring.
+search.slowlog.threshold.query.warn: 10s
+search.slowlog.threshold.query.info: 5s
+search.slowlog.threshold.query.debug: 2s
+search.slowlog.threshold.query.trace: 500ms
+
+# *Garbage collection logging*
+# Enable GC logs for troubleshooting memory issues.
+gc_logs.enabled: true
+
+# *Index settings*
+# Limit the number of shards and replicas for better performance in single-node setups.
+index.number_of_shards: 1
+index.number_of_replicas: 0
+
+# *Other settings*
+# Allow script-based fields in Elasticsearch queries (enabled by default).
+script.allowed_types: inline, stored
+script.allowed_contexts: search, update
+
+# *Monitoring*
+# Enable monitoring for this node in Kibana.
+xpack.monitoring.enabled: true
+
+# *Telemetry*
+# Disable telemetry to prevent sending data to Elastic's servers.
+telemetry.enabled: false
