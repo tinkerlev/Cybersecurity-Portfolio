@@ -88,4 +88,4 @@ Whether you are an individual or an organization, I am eager to contribute and s
 
 ## 📫 Contact Me
 - **Email:** elirandeeb@gmail.com  
-- **LinkedIn:** [Explore my experience and connect with me](https://www.linkedin.com/in/laui-deeb/)
+- **LinkedIn:** [Explore my experience and connect with me](https://www.linkedin.com/in/loai-deeb/)
