@@ -1,0 +1,83 @@
+# *Logstash Configuration File*
+# This configuration file defines the behavior of Logstash.
+# It includes pipeline management, logging, and performance settings.
+
+# *Pipeline settings*
+# The ID for the main pipeline. This is useful for multi-pipeline configurations.
+pipeline.id: "main-pipeline"
+
+# Define the path to the pipeline configuration files.
+path.config: "/etc/logstash/conf.d/*.conf"
+
+# Set the number of worker threads for processing events.
+pipeline.workers: 4
+
+# Limit the number of events a worker thread can collect before processing.
+pipeline.batch.size: 125
+
+# The maximum amount of time (in milliseconds) a batch is allowed to be collected before being processed.
+pipeline.batch.delay: 50
+
+# Configure the output format for error events.
+pipeline.ecs_compatibility: disabled
+
+# *Path settings*
+# Directory where Logstash stores its persistent data.
+path.data: /var/lib/logstash
+
+# Directory for Logstash log files.
+path.logs: /var/log/logstash
+
+# *HTTP API settings*
+# Enable the HTTP API for monitoring and managing Logstash.
+http.host: "0.0.0.0"
+http.port: 9600-9700
+
+# *Log level settings*
+# Set the log level. Options: 'trace', 'debug', 'info', 'warn', 'error', 'fatal'.
+log.level: info
+
+# Rotate log files based on size and retain a certain number of backups.
+log.rotation.size: 10mb
+log.rotation.keep: 7
+
+# *Monitoring and management*
+# Enable monitoring for Logstash in Kibana.
+xpack.monitoring.enabled: true
+
+# *Security and authentication*
+# If Elasticsearch uses HTTPS, uncomment and configure these settings.
+xpack.monitoring.elasticsearch.username: "elastic"
+xpack.monitoring.elasticsearch.password: "SuperSecurePassword123!"
+xpack.monitoring.elasticsearch.hosts: ["https://172.16.50.2:9200"]
+
+# Uncomment these settings to enable SSL for Elasticsearch monitoring.
+# xpack.monitoring.elasticsearch.ssl.certificate_authority: "/path/to/ca.crt"
+# xpack.monitoring.elasticsearch.ssl.verification_mode: "full"
+
+# *Dead Letter Queue (DLQ)*
+# Enable the Dead Letter Queue to handle events that fail to process.
+dead_letter_queue.enable: true
+
+# Maximum size of the Dead Letter Queue directory.
+dead_letter_queue.max_bytes: 1024mb
+
+# *Persistent Queues*
+# Enable persistent queues to buffer events in case of network or pipeline issues.
+queue.type: persisted
+queue.max_bytes: 1024mb
+queue.checkpoint.writes: 1024
+
+# *JVM tuning*
+# Configure JVM options in the jvm.options file for better performance.
+# Common settings include:
+# -Xms1g (minimum heap size)
+# -Xmx1g (maximum heap size)
+
+# *Plugin settings*
+# Define specific plugin directories for input, filter, and output plugins.
+path.plugins: []
+
+# *Shutdown behavior*
+# Configure the timeout for shutdown, ensuring clean termination of threads.
+shutdown.timeout: 5s
