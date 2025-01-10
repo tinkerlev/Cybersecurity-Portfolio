@@ -1,0 +1,91 @@
+# *Kibana Configuration File*
+# This configuration file defines the behavior of Kibana.
+# Below, you'll find detailed explanations for each setting to ensure optimal configuration.
+
+# *Elasticsearch connection settings*
+# The URL(s) of the Elasticsearch instance Kibana connects to.
+elasticsearch.hosts: ["http://172.16.50.2:9200"]
+
+# *Authentication for Elasticsearch*
+# These credentials must match the ones configured for your Elasticsearch instance.
+elasticsearch.username: "elastic"
+elasticsearch.password: "SuperSecurePassword123!"
+
+# *Kibana server settings*
+# The IP address or hostname Kibana binds to.
+server.host: "0.0.0.0"
+
+# The port Kibana listens on for incoming HTTP requests.
+server.port: 5601
+
+# The name of this Kibana instance. Useful for identifying instances in a multi-node setup.
+server.name: "SOC-Kibana-Instance"
+
+# *Paths for storing data and logs*
+# Directory where Kibana stores its persistent data.
+path.data: /var/lib/kibana
+
+# Directory for Kibana log files.
+logging.dest: /var/log/kibana/kibana.log
+
+# *Logging configuration*
+# Set the log level for Kibana. Options: 'debug', 'info', 'warn', 'error', 'fatal'.
+logging.level: debug
+
+# Enable JSON-formatted logs. This is useful for structured log analysis.
+logging.json: true
+
+# *User session settings*
+# Timeout settings for Kibana sessions. Adjust these values for enhanced security or usability.
+xpack.security.session.idleTimeout: "30m"
+xpack.security.session.lifespan: "8h"
+
+# *Monitoring and telemetry*
+# Enable or disable Kibana telemetry. Disabling ensures no data is sent to Elastic.
+telemetry.enabled: false
+
+# Enable monitoring for this Kibana instance. Requires monitoring to be enabled in Elasticsearch.
+monitoring.ui.enabled: true
+
+# *SSL and security settings*
+# Uncomment these settings if Elasticsearch uses HTTPS.
+# elasticsearch.ssl.certificateAuthorities: ["/path/to/ca.crt"]
+# elasticsearch.ssl.verificationMode: full
+
+# Encryption for saved objects
+# Encryption key for securing saved objects in Kibana. Ensure this key is unique and secure.
+xpack.encryptedSavedObjects.encryptionKey: "ThisIsAComplexEncryptionKey123!"
+
+# *Spaces and default applications*
+# Define the default space or app users are directed to upon login.
+kibana.defaultAppId: "discover"
+
+# *Data view settings*
+# Limit the number of rows displayed in a table.
+# This can help with performance when dealing with large datasets.
+kibana.autocompleteTimeout: 1000
+kibana.autocompleteTerminateAfter: 100000
+
+# *Advanced features*
+# Configure max payload size for requests. Default is 1048576 bytes (1MB).
+server.maxPayloadBytes: 26214400  # 25MB
+
+# Timeout for incoming HTTP requests. Default is 30 seconds.
+server.requestTimeout: 60000  # 60 seconds
+
+# *Cache settings*
+# Adjust these values to improve performance in high-traffic environments.
+server.customResponseHeaders: {}
+server.shutdownTimeout: "5s"
+
+# *Internationalization*
+# Set the default locale for Kibana. Defaults to English.
+i18n.locale: "en"
+
+# *Experimental features*
+# Uncomment to enable any experimental features (use at your own risk).
+# xpack.reporting.csv.maxSizeBytes: 20971520
+
+# *Additional notes*
+ - Ensure all directories specified (e.g., /var/lib/kibana, /var/log/kibana) have the correct permissions.
+ - Review the settings periodically to ensure compliance with organizational policies.
